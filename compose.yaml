@@ -1,0 +1,41 @@
+services:
+  coordinator:
+    build: .
+    image: w-sda:local
+    environment:
+      WSDA_TOKEN: ${WSDA_TOKEN:?Set WSDA_TOKEN in .env}
+    command: ["coordinator", "--config", "/config/run.json", "--state", "/state/coordinator", "--host", "0.0.0.0"]
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./run.json:/config/run.json:ro
+      - wsda-state:/state
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz')"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+  home-worker:
+    image: w-sda:local
+    profiles: ["gpu"]
+    environment:
+      WSDA_TOKEN: ${WSDA_TOKEN:?Set WSDA_TOKEN in .env}
+    command: ["worker", "--server", "http://coordinator:8000", "--allow-http", "--data", "/data", "--worker-id", "home", "--device", "cuda", "--jobs", "100", "--batch-size", "${HOME_BATCH_SIZE:-1}", "--work-dir", "/state/home", "--shard-index", "0", "--num-shards", "2"]
+    volumes:
+      - ./data:/data:ro
+      - wsda-state:/state
+    depends_on:
+      coordinator:
+        condition: service_healthy
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    security_opt: ["no-new-privileges:true"]
+volumes:
+  wsda-state:

@@ -1,0 +1,20 @@
+# Opt-in public HTTPS. Requires DNS -> this host and inbound TCP 80/443.
+services:
+  caddy:
+    image: caddy:2
+    environment:
+      WSDA_DOMAIN: ${WSDA_DOMAIN:?Set WSDA_DOMAIN to your DNS hostname}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      coordinator:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  caddy-data:
+  caddy-config:

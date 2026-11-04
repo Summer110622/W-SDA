@@ -1,0 +1,28 @@
+.........................                                                [100%]
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_data_training.py::test_tokenizer_utf8
+PASSED tests/test_data_training.py::test_shards_and_actual_backward
+PASSED tests/test_model.py::test_rope_norm
+PASSED tests/test_model.py::test_causal_and_trainable[base]
+PASSED tests/test_model.py::test_causal_and_trainable[plus]
+PASSED tests/test_model.py::test_numpy_reference_equations[base]
+PASSED tests/test_model.py::test_numpy_reference_equations[plus]
+PASSED tests/test_model.py::test_delta_gradcheck[base]
+PASSED tests/test_model.py::test_delta_gradcheck[plus]
+PASSED tests/test_model.py::test_exact_key_residual
+PASSED tests/test_model.py::test_checkpoint_and_fake_quant
+PASSED tests/test_model.py::test_duplicate_key_base_prefers_latest
+PASSED tests/test_protocol.py::test_codec_real_int8
+PASSED tests/test_protocol.py::test_codec_rejects_bad_input
+PASSED tests/test_protocol.py::test_async_mixing_idempotency_and_resume
+PASSED tests/test_protocol.py::test_stale_expired_and_schema
+PASSED tests/test_protocol.py::test_auth_http_and_limits
+PASSED tests/test_protocol.py::test_heterogeneous_step_scheduler
+PASSED tests/test_protocol.py::test_insecure_endpoint_rejected[http://example.org:8000]
+PASSED tests/test_protocol.py::test_insecure_endpoint_rejected[https://token@example.org]
+PASSED tests/test_protocol.py::test_insecure_endpoint_rejected[file:///tmp/x]
+PASSED tests/test_protocol.py::test_private_http_opt_in
+PASSED tests/test_protocol.py::test_malformed_safetensors_returns_400
+PASSED tests/test_protocol.py::test_resume_config_conflict
+PASSED tests/test_protocol.py::test_same_worker_lease_retry_with_capacity_one

@@ -1,0 +1,11 @@
+.git
+.venv
+__pycache__
+.pytest_cache
+.env
+data
+runs
+artifacts
+.wsda-workers
+*.safetensors
+*.sqlite3*
