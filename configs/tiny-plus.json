@@ -1,0 +1,41 @@
+{
+  "model": {
+    "vocab_size": 258,
+    "d_model": 128,
+    "num_heads": 4,
+    "num_layers": 3,
+    "intermediate_size": 384,
+    "max_seq_len": 128,
+    "layer_pattern": [
+      "rope",
+      "sda",
+      "nope"
+    ],
+    "rope_theta": 10000.0,
+    "dropout": 0.0,
+    "archive_capacity": 32,
+    "sda_variant": "plus",
+    "sda_threshold": 0.5,
+    "sda_gate_temperature": 0.1,
+    "sda_top_m": 4,
+    "sda_softmax_scale": 16.0,
+    "archive_fake_quant": true,
+    "gradient_checkpointing": false
+  },
+  "tokenizer_fingerprint": "wsda-byte-v1",
+  "learning_rate": 0.0003,
+  "weight_decay": 0.01,
+  "grad_clip": 1.0,
+  "seq_len": 64,
+  "local_steps": 8,
+  "min_local_steps": 1,
+  "max_local_steps": 64,
+  "target_seconds": 60.0,
+  "server_alpha": 0.5,
+  "max_staleness": 4,
+  "lease_seconds": 3600.0,
+  "max_delta_norm": 100.0,
+  "max_payload_mb": 256,
+  "max_leases": 16,
+  "seed": 42
+}
